@@ -1,0 +1,21 @@
+server:
+  port: 8888
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+      
+spring:
+  application:
+    name: googly-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: banking
+        uri: lb://bank-service
+        predicates:
+        - Path=/codersbank/**
+      - id: GooglyPay
+        uri: lb://googlypay-service
+        predicates:
+        - Path=/googlypay/**
